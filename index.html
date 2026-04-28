@@ -779,7 +779,10 @@ function openPhotoGallery(cat) {
     const t = document.createElement('div');
     t.className = 'gallery-thumb';
     // To use real images: t.innerHTML = `<img class="thumb-inner" src="${p.src}" alt="${p.caption}">`
-    t.innerHTML = `<div class="thumb-inner" style="background:${p.bg}"></div>`;
+    //t.innerHTML = `<div class="thumb-inner" style="background:${p.bg}"></div>`;
+    t.innerHTML = p.src
+      ? `<img class="thumb-inner" src="${p.src}" alt="${p.caption}">`
+      : `<div class="thumb-inner" style="background:${p.bg}"></div>`;
     t.onclick = () => openZoom(i);
     grid.appendChild(t);
   });
@@ -824,7 +827,10 @@ function renderZoom() {
   if (currentMode === 'photo') {
     const p = photoData[currentCat].photos[currentIdx];
     // To use real images: content.innerHTML = `<img class="zoom-img" src="${p.src}" style="object-fit:cover" alt="${p.caption}">`
-    content.innerHTML = `<div class="zoom-img" style="background:${p.bg}"></div>`;
+    //content.innerHTML = `<div class="zoom-img" style="background:${p.bg}"></div>`;
+    content.innerHTML = p.src
+      ? `<img src="${p.src}" style="width:100%;border-radius:10px;object-fit:cover;" alt="${p.caption}">`
+      : `<div class="zoom-img" style="background:${p.bg}"></div>`;
     caption.textContent = `${currentCat} · ${p.caption} · ${currentIdx+1} / ${photoData[currentCat].photos.length}`;
   } else {
     const v = videoData[currentCat].videos[currentIdx];
